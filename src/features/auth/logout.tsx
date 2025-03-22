@@ -13,7 +13,7 @@ export const Logout = () => {
 
     return (
         <div>
-            <Link href={"/auth"}>
+            <Link href={"/auth/sign-in/"}>
                 <Button type="primary" icon={<LogoutOutlined/>} onClick={()=> {
                     logout();
                     router.replace("/auth");

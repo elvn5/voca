@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import {LoginData} from "@/app/auth/page";
+import {LoginData} from "@/app/auth/sign-in/page";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 import {supabase} from "@/services";
 
@@ -17,6 +17,7 @@ export const useAuthStore = create<AuthState>()((set) => ({
     accessToken: null,
     logout: () => {
         set({isAuthenticated: false})
+        void supabase.auth.signOut();
     },
     login: async (data: LoginData, router) => {
         set({isLoading: true});

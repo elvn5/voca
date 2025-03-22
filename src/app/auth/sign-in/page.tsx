@@ -1,13 +1,15 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Card, Form, Input, Spin, Typography} from 'antd';
-import {LockOutlined, MailOutlined} from '@ant-design/icons';
+import {LockOutlined, LoginOutlined, MailOutlined} from '@ant-design/icons';
 import {Controller, useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import {useRouter} from "next/navigation";
 import {useAuthStore} from "@/store";
+import Link from "next/link";
+import {verifyToken} from "@/services";
 
 // Define Zod schema for validation
 const loginSchema = z.object({
@@ -17,7 +19,7 @@ const loginSchema = z.object({
 
 export type LoginData = z.infer<typeof loginSchema>;
 
-const LoginForm = () => {
+const LoginPage = () => {
     const {
         control,
         handleSubmit,
@@ -72,9 +74,16 @@ const LoginForm = () => {
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="dashed" htmlType="submit" block>
+                        <Button type="primary" htmlType="submit" block>
                             {isLoading ? (<Spin />) : "Войти"}
                         </Button>
+                    </Form.Item>
+                    <Form.Item>
+                        <Link href={"/auth/sign-up/"}>
+                            <Button type="text" className="w-full">
+                                Зарегистрироваться
+                            </Button>
+                        </Link>
                     </Form.Item>
                 </form>
             </Card>
@@ -82,4 +91,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default LoginPage;

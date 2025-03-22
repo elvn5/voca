@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {Navbar} from "@/features";
+import '@ant-design/v5-patch-for-react-19';
+import {ToastContainer} from "react-toastify";
 
 export const metadata: Metadata = {
   title: "VocaVoca",
@@ -14,10 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-      <div className="container py-5">
-          <Navbar/>
-      </div>
+      <body className="container p-6">
+      <ToastContainer/>
         {children}
       </body>
     </html>
